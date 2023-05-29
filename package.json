@@ -1,0 +1,23 @@
+{
+  "name": "javascript-the-complete-guide",
+  "version": "1.0.0",
+  "description": "Repository to hold exercises and assignments from the javascript course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matheus-IT/javascript-the-complete-guide.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matheus-IT/javascript-the-complete-guide/issues"
+  },
+  "homepage": "https://github.com/Matheus-IT/javascript-the-complete-guide#readme",
+  "dependencies": {
+    "prettier": "^2.8.8"
+  }
+}
