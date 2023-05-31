@@ -1,19 +1,27 @@
 const addMovieModal = document.getElementById('add-modal');
 
-const startAddMovieButton = document.getElementById('addMovieButton');
-startAddMovieButton.onclick = handleAddMovieClicked;
-
-const cancelAddMovie = document.getElementById('cancelAddMovie');
-cancelAddMovie.onclick = handleAddMovieClicked;
+document.getElementById('startAddMovieButton').onclick = handleStartAddMovieClicked;
 
 const backdrop = document.getElementById('backdrop');
-backdrop.onclick = handleAddMovieClicked;
+backdrop.onclick = dismissAddMovie;
 
-function handleAddMovieClicked(e) {
+function handleStartAddMovieClicked(e) {
     addMovieModal.classList.toggle('visible');
-    toggleBackdrop();
-}
-
-function toggleBackdrop() {
     backdrop.classList.toggle('visible');
 }
+
+function dismissAddMovie() {
+    addMovieModal.classList.remove('visible');
+    backdrop.classList.remove('visible');
+}
+
+const addMovieForm = addMovieModal.querySelector('#addMovieForm');
+
+addMovieForm.cancelAddMovie.onclick = dismissAddMovie;
+
+addMovieForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // study best practices to validate form fields
+    console.log(addMovieForm.elements);
+});
