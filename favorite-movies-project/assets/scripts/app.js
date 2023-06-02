@@ -38,6 +38,7 @@ addMovieForm.addEventListener('submit', function (e) {
 
     if (anyErrors) {
         for (const e of validationErrors) {
+            if (!e) continue;
             const [controlId, errorMessage] = e;
             document.querySelector(`#${controlId}-error`).innerHTML = errorMessage;
         }
