@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Favorite Movies</title>
     <link rel="stylesheet" href="assets/styles/app.css" />
-    <script src="assets/scripts/app.js" defer></script>
+    <script type="module" src="assets/scripts/app.js"></script>
 </head>
 
 <body>
@@ -16,12 +16,16 @@
         <form id="addMovieForm" class="modal__content">
             <label for="title">Movie Title</label>
             <input type="text" name="title" id="title" />
+            <div id="title-error"></div>
 
             <label for="image-url">Image URL</label>
-            <input type="text" name="image-url" id="image-url" />
+            <input type="text" name="image_url" id="image_url" />
+            <div id="image_url-error"></div>
 
             <label for="rating">Your Rating</label>
             <input type="number" step="1" max="5" min="1" name="rating" id="rating" />
+            <div id="rating-error"></div>
+
             <div class="modal__actions">
                 <button id="cancelAddMovie" class="btn btn--passive">Cancel</button>
                 <button id="addMovie" class="btn btn--success">Add</button>

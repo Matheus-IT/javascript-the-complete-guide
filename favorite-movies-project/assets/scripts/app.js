@@ -1,3 +1,6 @@
+import { validateImageUrl, validateRating, validateTitle } from './form_validation.js';
+
+
 const addMovieModal = document.getElementById('add-modal');
 
 document.getElementById('startAddMovieButton').onclick = handleStartAddMovieClicked;
@@ -22,6 +25,24 @@ addMovieForm.cancelAddMovie.onclick = dismissAddMovie;
 addMovieForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // study best practices to validate form fields
-    console.log(addMovieForm.elements);
+    const formDataEntries = new FormData(addMovieForm).entries();
+    const { title, image_url, rating } = Object.fromEntries(formDataEntries);
+
+    const validationErrors = [
+        validateImageUrl(image_url),
+        validateRating(rating),
+        validateTitle(title),
+    ];
+
+    const anyErrors = validationErrors.some(e => e !== null);
+
+    if (anyErrors) {
+        for (const e of validationErrors) {
+            const [controlId, errorMessage] = e;
+            document.querySelector(`#${controlId}-error`).innerHTML = errorMessage;
+        }
+        return;
+    }
 });
+
+
