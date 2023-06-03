@@ -1,6 +1,6 @@
 import { validateImageUrl, validateRating, validateTitle } from './form_validation.js';
 
-
+const movies = [];
 const addMovieModal = document.getElementById('add-modal');
 
 document.getElementById('startAddMovieButton').onclick = handleStartAddMovieClicked;
@@ -44,6 +44,17 @@ addMovieForm.addEventListener('submit', function (e) {
         }
         return;
     }
+
+    movies.push({ title, rating, image_url });
+
+    dismissAddMovie();
+    clearFields(addMovieForm);
+
+    console.log('movies', movies);
 });
+
+function clearFields(form) {
+    Array.from(form.elements).forEach(e => e.value = '');
+}
 
 
