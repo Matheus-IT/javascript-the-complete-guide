@@ -26,10 +26,10 @@ addMovieForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
     const formDataEntries = new FormData(addMovieForm).entries();
-    const { title, image_url, rating } = Object.fromEntries(formDataEntries);
+    const { title, image_url: imageUrl, rating } = Object.fromEntries(formDataEntries);
 
     const validationErrors = [
-        validateImageUrl(image_url),
+        validateImageUrl(imageUrl),
         validateRating(rating),
         validateTitle(title),
     ];
@@ -45,16 +45,43 @@ addMovieForm.addEventListener('submit', function (e) {
         return;
     }
 
-    movies.push({ title, rating, image_url });
+    movies.push({ title, rating, imageUrl });
 
     dismissAddMovie();
     clearFields(addMovieForm);
 
     console.log('movies', movies);
+
+    renderNewMovieElement(title, imageUrl, rating);
+
+    showEntryTextIfNeeded();
 });
 
 function clearFields(form) {
     Array.from(form.elements).forEach(e => e.value = '');
 }
 
+function renderNewMovieElement(title, imageUrl, rating) {
+    const newMovieElement = document.createElement('li');
+    newMovieElement.className = 'movie-element';
+    newMovieElement.innerHTML = `
+        <div class="movie-element__image">
+            <img src="${imageUrl}" alt="${title}" />
+        </div>
 
+        <div class="movie-element__info">
+            <h2>${title}</h2>
+            <p>${rating}/5 stars</p>
+        </div>
+    `;
+    document.getElementById('movie-list').append(newMovieElement);
+}
+
+function showEntryTextIfNeeded() {
+    const entryPresentation = document.getElementById('entry-text');
+    if (movies.length) {
+        entryPresentation.style.display = 'none';
+    } else {
+        entryPresentation.style.display = 'none';
+    }
+}
