@@ -45,14 +45,20 @@ addMovieForm.addEventListener('submit', function (e) {
         return;
     }
 
-    movies.push({ title, rating, imageUrl });
+    const newMovie = { id: crypto.randomUUID(), title, rating, imageUrl };
+    movies.push(newMovie);
 
     dismissAddMovie();
     clearFields(addMovieForm);
 
     console.log('movies', movies);
 
-    renderNewMovieElement(title, imageUrl, rating);
+    renderNewMovieElement(
+        newMovie.id,
+        newMovie.title,
+        newMovie.imageUrl,
+        newMovie.rating,
+    );
 
     showEntryTextIfNeeded();
 });
@@ -61,9 +67,10 @@ function clearFields(form) {
     Array.from(form.elements).forEach(e => e.value = '');
 }
 
-function renderNewMovieElement(title, imageUrl, rating) {
+function renderNewMovieElement(id, title, imageUrl, rating) {
     const newMovieElement = document.createElement('li');
     newMovieElement.className = 'movie-element';
+    newMovieElement.id = id;
     newMovieElement.innerHTML = `
         <div class="movie-element__image">
             <img src="${imageUrl}" alt="${title}" />
@@ -74,7 +81,21 @@ function renderNewMovieElement(title, imageUrl, rating) {
             <p>${rating}/5 stars</p>
         </div>
     `;
+    newMovieElement.addEventListener('click', () => handleDeleteMovie(id));
     document.getElementById('movie-list').append(newMovieElement);
+}
+
+function handleDeleteMovie(id) {
+    const index = movies.findIndex(m => m.id === id);
+    if (index !== -1) {
+        // remove from array
+        movies.splice(index, 1);
+        // remove from dom
+        const movieElement = document.getElementById(id);
+        movieElement.remove();
+
+        showEntryTextIfNeeded();
+    }
 }
 
 function showEntryTextIfNeeded() {
@@ -82,6 +103,6 @@ function showEntryTextIfNeeded() {
     if (movies.length) {
         entryPresentation.style.display = 'none';
     } else {
-        entryPresentation.style.display = 'none';
+        entryPresentation.style.display = 'block';
     }
 }
