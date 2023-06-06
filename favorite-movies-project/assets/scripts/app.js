@@ -1,6 +1,39 @@
 import { validateImageUrl, validateRating, validateTitle } from './form_validation.js';
 
-const movies = [];
+const movies = [
+    {
+        id: "2fa59dd6-bd10-411b-9ac0-ccd184a7a9c6",
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVZ5pdPcQ6LCKMk_JWiK0UfHViF5afN7VLWYfB8A1BkOXNrvC6",
+        rating: "5",
+        title: "Jurassic World Dominion",
+    },
+
+    {
+        id: "fa177756-860f-4f1c-b58a-6adcc03d4701",
+        imageUrl: "https://movies.universalpictures.com/media/fstx-montage1sheet2-rgb-1-64108e93e63dd-1.jpg",
+        rating: "3",
+        title: "Fast X",
+    },
+
+    {
+        id: "a0e69cfe-ec0c-4cc4-8731-2b9ed66ed190",
+        imageUrl: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ17XGATi5V_xrlBKORLKAc6kVh-Kejj6CwnbknLkVxO3N_Gb3m",
+        rating: "4",
+        title: "The Last Kingdom: Seven Kings Must Die"
+    }
+];
+
+// load initial movies
+for (const m of movies) {
+    renderNewMovieElement(
+        m.id,
+        m.title,
+        m.imageUrl,
+        m.rating,
+    );
+}
+showEntryTextIfNeeded();
+
 const addMovieModal = document.getElementById('add-modal');
 
 document.getElementById('startAddMovieButton').onclick = handleStartAddMovieClicked;
