@@ -12,7 +12,7 @@
 
 <body>
     <div id="backdrop"></div>
-    <div class="modal" id="add-modal">
+    <div class="modal" id="add-modal" tabindex="-1">
         <form id="addMovieForm" class="modal__content">
             <label for="title">Movie Title</label>
             <input type="text" name="title" id="title" />
@@ -32,15 +32,15 @@
             </div>
         </form>
     </div>
-    <div class="modal" id="delete-modal">
+    <div class="modal" id="delete-modal" data-target="" tabindex="-1">
         <h2 class="modal__title">Are you sure?</h2>
         <p class="modal__content">
             Are you sure you want to delete this item? This action can't be made
             undone!
         </p>
         <div class="modal__actions">
-            <button class="btn btn--passive">No (Cancel)</button>
-            <button class="btn btn--danger">Yes</button>
+            <button id="abortDeleteMovie" class="btn btn--passive">No (Cancel)</button>
+            <button id="deleteMovieConfirmation" class="btn btn--danger">Yes</button>
         </div>
     </div>
 
