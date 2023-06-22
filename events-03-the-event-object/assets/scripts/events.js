@@ -5,12 +5,12 @@ const buttons = document.querySelectorAll('button');
 // };
 
 const buttonClickHandler = event => {
-  event.target.disabled = true;
-  console.log(event);
+    event.target.disabled = true;
+    console.log(event);
 };
 
 const anotherButtonClickHandler = () => {
-  console.log('This was clicked!');
+    console.log('This was clicked!');
 };
 
 // button.onclick = buttonClickHandler;
@@ -25,5 +25,20 @@ const boundFn = buttonClickHandler.bind(this);
 // }, 2000);
 
 buttons.forEach(btn => {
-  btn.addEventListener('click', buttonClickHandler);
+    btn.addEventListener('click', buttonClickHandler);
 });
+
+let curElementNumber = 0;
+
+function scrollHandler() {
+    const distanceToBottom = document.body.getBoundingClientRect().bottom;
+
+    if (distanceToBottom < document.documentElement.clientHeight + 150) {
+        const newDataElement = document.createElement('div');
+        curElementNumber++;
+        newDataElement.innerHTML = `<p>Element ${curElementNumber}</p>`;
+        document.body.append(newDataElement);
+    }
+}
+
+window.addEventListener('scroll', scrollHandler);
