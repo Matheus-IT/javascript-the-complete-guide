@@ -155,21 +155,18 @@ class ProjectList {
         const itemList = document.querySelector(`#${this.type}-projects ul`);
 
         itemList.addEventListener('dragenter', event => {
-            if (event.dataTransfer.types[0] === 'text/plain') {
+            if (event.dataTransfer.types[0] === 'text/plain')
                 event.preventDefault();
-            }
             itemList.parentElement.classList.add('droppable');
         });
 
         itemList.addEventListener('dragover', event => {
-            if (event.dataTransfer.types[0] === 'text/plain') {
+            if (event.dataTransfer.types[0] === 'text/plain')
                 event.preventDefault();
-            }
         });
         itemList.addEventListener('dragleave', event => {
-            if (event.relatedTarget.closest(`#${this.type}-projects ul`) !== itemList) {
+            if (event.relatedTarget.closest(`#${this.type}-projects ul`) !== itemList)
                 itemList.parentElement.classList.remove('droppable');
-            }
         });
     }
 
