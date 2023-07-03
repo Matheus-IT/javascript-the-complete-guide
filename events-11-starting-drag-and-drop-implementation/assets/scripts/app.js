@@ -168,6 +168,15 @@ class ProjectList {
             if (event.relatedTarget.closest(`#${this.type}-projects ul`) !== itemList)
                 itemList.parentElement.classList.remove('droppable');
         });
+
+        itemList.addEventListener('drop', event => {
+            const prjId = event.dataTransfer.getData('text/plain');
+            if (this.projects.find(p => p.id === prjId))
+                return;
+            // Trigger project completion
+            document.getElementById(prjId).querySelector('button:last-of-type').click();
+            itemList.parentElement.classList.remove('droppable');
+        })
     }
 
     setSwitchHandlerFunction(switchHandlerFunction) {
